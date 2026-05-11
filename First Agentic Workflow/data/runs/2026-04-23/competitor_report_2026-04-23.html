@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIS Competitor Intelligence — 2026-04-23</title>
+<style>
+  :root {
+    --bg-primary: #1A1E22;
+    --bg-surface: #0D2626;
+    --accent: #00C9A0;
+    --text: #FFFFFF;
+    --muted: #A0B0B0;
+    --danger: #E05555;
+    --warning: #F0A030;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 0 0 60px 0;
+  }
+
+  /* Header */
+  .report-header {
+    background: var(--bg-surface);
+    border-bottom: 3px solid var(--accent);
+    padding: 28px 48px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .logo { height: 56px; width: auto; }
+  .logo-placeholder {
+    height: 56px; width: 56px;
+    background: var(--accent);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 20px; color: var(--bg-primary);
+  }
+  .header-text { flex: 1; }
+  .header-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.3px;
+  }
+  .header-subtitle {
+    color: var(--accent);
+    font-size: 13px;
+    margin-top: 2px;
+  }
+  .header-date {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 4px;
+  }
+
+  /* Summary bar */
+  .summary-bar {
+    display: flex;
+    gap: 24px;
+    padding: 20px 48px;
+    background: color-mix(in srgb, var(--bg-surface) 60%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+  .stat-card {
+    background: var(--bg-surface);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    border-radius: 8px;
+    padding: 12px 20px;
+    min-width: 140px;
+  }
+  .stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-value.danger { color: var(--danger); }
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Content */
+  .content { padding: 32px 48px; }
+  .section-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+  }
+
+  /* Competitor cards */
+  .competitor-card {
+    background: var(--bg-surface);
+    border: 1px solid color-mix(in srgb, var(--accent) 15%, transparent);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+  }
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  .competitor-name {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .competitor-url a {
+    color: var(--muted);
+    font-size: 12px;
+    text-decoration: none;
+  }
+  .competitor-url a:hover { color: var(--accent); }
+  .threat-badge {
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--bg-primary);
+    white-space: nowrap;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 4px;
+  }
+  .signal-block { }
+  .signal-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .muted { color: var(--muted); font-size: 12px; margin-top: 2px; }
+  .opp-block {
+    margin-top: 12px;
+    padding: 12px;
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+  }
+  .signals-footer {
+    margin-top: 12px;
+    font-size: 11px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* Footer */
+  .report-footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--muted);
+    font-size: 11px;
+    border-top: 1px solid color-mix(in srgb, var(--accent) 15%, transparent);
+    margin-top: 40px;
+  }
+
+  @media print {
+    :root {
+      --bg-primary: #ffffff;
+      --bg-surface: #f4f6f8;
+      --accent: #007a60;
+      --text: #111111;
+      --muted: #555555;
+      --danger: #c0392b;
+      --warning: #b7770d;
+    }
+    body {
+      background: #ffffff;
+      color: #111111;
+      font-size: 12px;
+    }
+    .report-header {
+      background: #f4f6f8;
+      border-bottom: 3px solid #007a60;
+    }
+    .header-title { color: #111111; }
+    .header-subtitle { color: #007a60; }
+    .header-date { color: #555555; }
+    .summary-bar {
+      background: #f4f6f8;
+      border-bottom: 1px solid #dde2e7;
+    }
+    .stat-card {
+      background: #ffffff;
+      border: 1px solid #dde2e7;
+    }
+    .stat-value { color: #007a60; }
+    .stat-value.danger { color: #c0392b; }
+    .section-title { color: #007a60; border-bottom-color: #dde2e7; }
+    .competitor-card {
+      background: #ffffff;
+      border: 1px solid #dde2e7;
+      page-break-inside: avoid;
+      box-shadow: none;
+    }
+    .competitor-name { color: #111111; }
+    .threat-badge { color: #ffffff; }
+    .signal-label { color: #555555; }
+    .muted { color: #555555; }
+    .opp-block {
+      background: #f0faf7;
+      border-left: 3px solid #007a60;
+    }
+    .report-footer {
+      color: #555555;
+      border-top-color: #dde2e7;
+    }
+    .competitor-url a { color: #555555; }
+  }
+</style>
+</head>
+<body>
+
+<div class="report-header">
+  <img src="data:image/png;base64,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" class="logo" alt="AIS Logo">
+  <div class="header-text">
+    <div class="header-title">Competitor Intelligence Report</div>
+    <div class="header-subtitle">AIS Market — Market Analysis</div>
+    <div class="header-date">Generated: April 23, 2026</div>
+  </div>
+</div>
+
+<div class="summary-bar">
+  <div class="stat-card">
+    <div class="stat-value">5</div>
+    <div class="stat-label">Competitors Tracked</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value danger">1</div>
+    <div class="stat-label">High Threat (4-5)</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">2026-04-23</div>
+    <div class="stat-label">Report Date</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="section-title">Competitor Profiles — Ranked by Threat Level</div>
+  
+    <div class="competitor-card">
+      <div class="card-header">
+        <div>
+          <div class="competitor-name">Owler</div>
+          <div class="competitor-url"><a href="https://www.owler.com" target="_blank">https://www.owler.com</a></div>
+        </div>
+        <div class="threat-badge" style="background:#E05555">
+          High Threat &nbsp; 4/5
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <div class="signal-block">
+          <div class="signal-label">Messaging</div>
+          <div>Owler positions as a freemium competitive intelligence network built on crowdsourced company data and news alerts. Their messaging targets individual professionals who want to track competitors without heavy setup. Simpler and shallower than enterprise tools — competitor news feeds rather than deep signal analysis.</div>
+        </div>
+        <div class="signal-block">
+          <div class="signal-label">Pricing</div>
+          <div><strong>Freemium</strong></div>
+          <div class="muted">Free tier available. Owler Pro at ~$35/month. Owler Max at ~$50/month. Closest pricing model to AIS Market's planned structure.</div>
+        </div>
+        <div class="signal-block">
+          <div class="signal-label">Reviews</div>
+          <div>Mixed
+            &nbsp;&nbsp;⭐ 3.8
+          </div>
+          <div class="muted">Good for news alerts but data is often outdated</div>
+        </div>
+        <div class="signal-block">
+          <div class="signal-label">Hiring</div>
+          <div><strong>6</strong> open roles</div>
+          <div class="muted">Engineering, Sales</div>
+        </div>
+      </div>
+
+      <div class="signal-block" style="margin-top:12px">
+        <div class="signal-label">Threat Rationale</div>
+        <div>Owler is the most direct pricing and positioning analog to AIS Market — both freemium, both targeting teams without big CI budgets. Owler's weak reviews on data quality are AIS Market's clearest differentiation opportunity.</div>
+      </div>
+
+      <div class="signal-block" style="margin-top:12px">
+        <div class="signal-label">Notable Changes This Week</div>
+        <div>First analysis</div>
+      </div>
+
+      <div class="opp-block"><div class="signal-label" style="color:#00C9A0">Opportunities for AIS</div><div>Owler's top complaints are stale data and shallow insights — exactly what AI-powered weekly automation solves. AIS Market can directly attack Owler's positioning with messaging around 'fresh, AI-analyzed data vs crowdsourced guesses.' Owler's minimal hiring (6 roles) suggests low growth investment, leaving room to out-innovate them.</div></div>
+
+      <div class="signals-footer">Data collected: website, pricing, reviews, jobs</div>
+    </div>
+    
+
+    <div class="competitor-card">
+      <div class="card-header">
+        <div>
+          <div class="competitor-name">Crayon</div>
+          <div class="competitor-url"><a href="https://www.crayon.co" target="_blank">https://www.crayon.co</a></div>
+        </div>
+        <div class="threat-badge" style="background:#F0A030">
+          Moderate Threat &nbsp; 3/5
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <div class="signal-block">
+          <div class="signal-label">Messaging</div>
+          <div>Crayon positions itself as the enterprise-grade competitive intelligence platform for revenue teams. Their messaging centers on 'winning more deals' through real-time market and competitor tracking, strongly targeting sales enablement and battlecard generation for mid-to-large SaaS companies.</div>
+        </div>
+        <div class="signal-block">
+          <div class="signal-label">Pricing</div>
+          <div><strong>Enterprise</strong></div>
+          <div class="muted">No public pricing. Demo-required sales process. Estimated $15,000–$50,000+/year based on team size. Positioned well above AIS Market's freemium entry point.</div>
+        </div>
+        <div class="signal-block">
+          <div class="signal-label">Reviews</div>
+          <div>Positive
+            &nbsp;&nbsp;⭐ 4.4
+          </div>
+          <div class="muted">Powerful but expensive and complex to set up</div>
+        </div>
+        <div class="signal-block">
+          <div class="signal-label">Hiring</div>
+          <div><strong>18</strong> open roles</div>
+          <div class="muted">Sales, Customer Success, Engineering</div>
+        </div>
+      </div>
+
+      <div class="signal-block" style="margin-top:12px">
+        <div class="signal-label">Threat Rationale</div>
+        <div>Strong brand in the CI space but targets enterprise budgets — minimal direct threat to AIS Market's freemium, self-serve positioning for product and marketing teams.</div>
+      </div>
+
+      <div class="signal-block" style="margin-top:12px">
+        <div class="signal-label">Notable Changes This Week</div>
+        <div>First analysis</div>
+      </div>
+
+      <div class="opp-block"><div class="signal-label" style="color:#00C9A0">Opportunities for AIS</div><div>Crayon's demo-required, enterprise-only sales process leaves the entire SMB and mid-market self-serve segment unserved. AIS Market can own that segment with a freemium entry point. Reviews consistently cite Crayon as 'too expensive for what we need' — a direct opening for AIS Market's messaging.</div></div>
+
+      <div class="signals-footer">Data collected: website, pricing, reviews, jobs</div>
+    </div>
+    
+
+    <div class="competitor-card">
+      <div class="card-header">
+        <div>
+          <div class="competitor-name">Klue</div>
+          <div class="competitor-url"><a href="https://klue.com" target="_blank">https://klue.com</a></div>
+        </div>
+        <div class="threat-badge" style="background:#F0A030">
+          Moderate Threat &nbsp; 3/5
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <div class="signal-block">
+          <div class="signal-label">Messaging</div>
+          <div>Klue markets itself as an AI-powered competitive enablement platform focused on empowering sales teams with dynamic battlecards. Their positioning emphasizes real-time alerts, win/loss analysis, and integration with CRMs like Salesforce. Heavily targeting B2B SaaS with a sales-team-first narrative.</div>
+        </div>
+        <div class="signal-block">
+          <div class="signal-label">Pricing</div>
+          <div><strong>Enterprise</strong></div>
+          <div class="muted">No public pricing. Custom contracts only. Estimated $20,000–$60,000/year. Requires minimum team size to justify ROI.</div>
+        </div>
+        <div class="signal-block">
+          <div class="signal-label">Reviews</div>
+          <div>Positive
+            &nbsp;&nbsp;⭐ 4.6
+          </div>
+          <div class="muted">Best battlecard tool but steep learning curve</div>
+        </div>
+        <div class="signal-block">
+          <div class="signal-label">Hiring</div>
+          <div><strong>24</strong> open roles</div>
+          <div class="muted">Engineering, Sales, Product, Marketing</div>
+        </div>
+      </div>
+
+      <div class="signal-block" style="margin-top:12px">
+        <div class="signal-label">Threat Rationale</div>
+        <div>Klue is the benchmark competitor in CI for sales teams but operates at a price point and use-case (sales battlecards) that differs from AIS Market's product + marketing team focus and automated weekly reports.</div>
+      </div>
+
+      <div class="signal-block" style="margin-top:12px">
+        <div class="signal-label">Notable Changes This Week</div>
+        <div>First analysis</div>
+      </div>
+
+      <div class="opp-block"><div class="signal-label" style="color:#00C9A0">Opportunities for AIS</div><div>Klue's sales-first focus and complex onboarding leaves product and marketing teams underserved. AIS Market's automated weekly reports and branded HTML output targets exactly who Klue ignores. Klue's 24 open roles signals aggressive expansion — expect increased marketing spend and possible pricing adjustments.</div></div>
+
+      <div class="signals-footer">Data collected: website, pricing, reviews, jobs</div>
+    </div>
+    
+
+    <div class="competitor-card">
+      <div class="card-header">
+        <div>
+          <div class="competitor-name">Kompyte</div>
+          <div class="competitor-url"><a href="https://www.kompyte.com" target="_blank">https://www.kompyte.com</a></div>
+        </div>
+        <div class="threat-badge" style="background:#00C9A0">
+          Low Threat &nbsp; 2/5
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <div class="signal-block">
+          <div class="signal-label">Messaging</div>
+          <div>Kompyte (now part of Semrush) positions as an automated competitive intelligence platform with a focus on tracking competitor website changes, ads, job postings, and generating automated battlecards. Post-acquisition messaging emphasizes integration with the broader Semrush ecosystem.</div>
+        </div>
+        <div class="signal-block">
+          <div class="signal-label">Pricing</div>
+          <div><strong>Enterprise</strong></div>
+          <div class="muted">Pricing not public post-Semrush acquisition. Likely bundled with Semrush enterprise plans. Previously estimated $8,000–$25,000/year as standalone.</div>
+        </div>
+        <div class="signal-block">
+          <div class="signal-label">Reviews</div>
+          <div>Mixed
+            &nbsp;&nbsp;⭐ 3.9
+          </div>
+          <div class="muted">Good automation but post-acquisition support has slipped</div>
+        </div>
+        <div class="signal-block">
+          <div class="signal-label">Hiring</div>
+          <div><strong>5</strong> open roles</div>
+          <div class="muted">Engineering</div>
+        </div>
+      </div>
+
+      <div class="signal-block" style="margin-top:12px">
+        <div class="signal-label">Threat Rationale</div>
+        <div>Kompyte's acquisition by Semrush has caused product stagnation and support issues based on reviews. Its automation approach overlaps with AIS Market but it is no longer a standalone growth threat.</div>
+      </div>
+
+      <div class="signal-block" style="margin-top:12px">
+        <div class="signal-label">Notable Changes This Week</div>
+        <div>First analysis</div>
+      </div>
+
+      <div class="opp-block"><div class="signal-label" style="color:#00C9A0">Opportunities for AIS</div><div>Kompyte reviews post-acquisition are trending negative on support quality and product velocity — an ideal moment for AIS Market to target dissatisfied Kompyte customers. Minimal hiring (5 roles, all engineering) confirms the product is in maintenance mode. Message directly to teams frustrated with Kompyte's post-acquisition slowdown.</div></div>
+
+      <div class="signals-footer">Data collected: website, pricing, reviews, jobs</div>
+    </div>
+    
+
+    <div class="competitor-card">
+      <div class="card-header">
+        <div>
+          <div class="competitor-name">SEMrush</div>
+          <div class="competitor-url"><a href="https://www.semrush.com" target="_blank">https://www.semrush.com</a></div>
+        </div>
+        <div class="threat-badge" style="background:#00C9A0">
+          Low Threat &nbsp; 2/5
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <div class="signal-block">
+          <div class="signal-label">Messaging</div>
+          <div>SEMrush markets itself as an all-in-one digital marketing suite with competitor analysis as one of many features. Their messaging emphasizes SEO, PPC, and content marketing intelligence. Competitor tracking is a feature, not their core identity — teams use it for search intelligence, not strategic CI.</div>
+        </div>
+        <div class="signal-block">
+          <div class="signal-label">Pricing</div>
+          <div><strong>$50-200/mo</strong></div>
+          <div class="muted">Pro at $139.95/mo, Guru at $249.95/mo, Business at $499.95/mo. All public, self-serve. Competes on breadth, not CI depth.</div>
+        </div>
+        <div class="signal-block">
+          <div class="signal-label">Reviews</div>
+          <div>Positive
+            &nbsp;&nbsp;⭐ 4.5
+          </div>
+          <div class="muted">Excellent for SEO but overwhelming feature set</div>
+        </div>
+        <div class="signal-block">
+          <div class="signal-label">Hiring</div>
+          <div><strong>41</strong> open roles</div>
+          <div class="muted">Engineering, Marketing, Sales, Data Science, Product</div>
+        </div>
+      </div>
+
+      <div class="signal-block" style="margin-top:12px">
+        <div class="signal-label">Threat Rationale</div>
+        <div>SEMrush is a marketing suite, not a CI platform. Teams using SEMrush for competitor research are doing DIY work — they're AIS Market prospects, not satisfied CI customers.</div>
+      </div>
+
+      <div class="signal-block" style="margin-top:12px">
+        <div class="signal-label">Notable Changes This Week</div>
+        <div>First analysis</div>
+      </div>
+
+      <div class="opp-block"><div class="signal-label" style="color:#00C9A0">Opportunities for AIS</div><div>SEMrush users who want competitor intelligence beyond SEO/PPC have to stitch insights manually — a pain point AIS Market directly solves. Target SEMrush users in marketing with messaging around 'CI that goes beyond search data.' SEMrush's 41 open roles and $499/mo top tier signals they're moving upmarket, widening the gap from SMB teams.</div></div>
+
+      <div class="signals-footer">Data collected: website, pricing, reviews, jobs</div>
+    </div>
+    
+</div>
+
+<div class="report-footer">
+  Confidential — AIS Internal Use Only
+  &nbsp;·&nbsp; Generated by AIS Competitor Intelligence Workflow
+  &nbsp;·&nbsp; April 23, 2026
+</div>
+
+</body>
+</html>

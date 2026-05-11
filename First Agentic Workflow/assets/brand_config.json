@@ -1,0 +1,19 @@
+{
+  "company": "AIS",
+  "colors": {
+    "bg_primary": "#1A1E22",
+    "bg_surface": "#0D2626",
+    "accent": "#00C9A0",
+    "text_primary": "#FFFFFF",
+    "text_muted": "#A0B0B0",
+    "danger": "#E05555",
+    "warning": "#F0A030"
+  },
+  "logo": "assets/AIS_logo.png",
+  "fonts": {
+    "heading": "Segoe UI, Arial, sans-serif",
+    "body": "Segoe UI, Arial, sans-serif",
+    "mono": "Consolas, monospace"
+  },
+  "report_footer": "Confidential — AIS Internal Use Only"
+}

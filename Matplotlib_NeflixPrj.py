@@ -1,0 +1,47 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+data = pd.read_csv('Netflix_DataSet.csv')
+print(data.head(10))
+data =data.dropna(subset={'type','country','release_year','rating','duration'})
+type_count = data['type'].value_counts()
+print(type_count)
+
+plt.figure(figsize=(6,4))
+plt.bar(type_count.index, type_count.values, color=['skyblue','orange'])
+plt.title ("Number of Movies VS TV Shows")
+plt.xlabel('Type')
+plt.ylabel('Count')
+plt.tight_layout()
+plt.savefig('Movies_TVShow.png')
+plt.show()
+
+rating_count = data['rating'].value_counts()
+plt.figure(figsize=(8,6))
+plt.pie(rating_count, labels=rating_count.index, autopct='%1.1f%%',startangle=90)
+plt.title('Percentage Of Content Rating')
+plt.tight_layout()
+plt.savefig('Movies_TVShowRating.png')
+plt.show()
+
+movie_data = data[data['type']=='Movie'].copy()
+movie_data['duration_int'] = movie_data['duration'].str.replace('min','').astype(int)
+plt.figure(figsize=(8,6))
+plt.hist(movie_data['duration_int'], bins=30, color='coral',edgecolor='black')
+plt.title("Distribution Of Movie Duration")
+plt.xlabel("Duration (minutes)")
+plt.ylabel("Number Of Movies")
+plt.tight_layout()
+plt.savefig('MovieDurationHistogram.png')
+plt.show()
+
+release_count= data['release_year'].value_counts().sort_index()
+plt.figure(figsize=(10,6))
+plt.scatter(release_count.index, release_count.values, color='red')
+plt.title("Release Year VS Number Of Shows")
+plt.xlabel("Release Year")
+plt.ylabel("Number Of Shows")
+plt.tight_layout()
+plt.savefig('ReleaseYearScatter.png')
+plt.show()

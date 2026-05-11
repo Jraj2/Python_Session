@@ -1,0 +1,11 @@
+EmployeeID,Name,Age,Department,Salary,YearsExperience,PerformanceScore
+101,John Doe,29,Engineering,85000,5,NaN
+102,Jane Smith,NaN,Marketing,92000,7,88
+103,Bob Johnson,45,Sales,,10,95
+104,Alice Brown,32,Engineering,NaN,NaN,82
+105,Charlie Davis,NaN,HR,12000,12,91
+106,Eva Green,27,Finance,67000,,null
+107,Frank Moore,38,Engineering,98000,15,89
+108,Grace Lee,NaN,Marketing,NaN,NaN,NaN
+109,Hank Miller,50,Sales,105000,20,97
+110,Ivy Wilson,NaN,HR,NaN,NaN,NaN

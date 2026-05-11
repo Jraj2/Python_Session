@@ -1,0 +1,110 @@
+[
+  {
+    "name": "Crayon",
+    "website_url": "https://www.crayon.co",
+    "g2_slug": "crayon",
+    "capterra_slug": "crayon",
+    "trustpilot_slug": "crayon.co",
+    "careers_url": "https://www.crayon.co/careers",
+    "rationale": "Enterprise-grade competitive intelligence platform tracking competitor website changes, messaging, and market signals — the primary upper-market alternative AIS Market is positioned against."
+  },
+  {
+    "name": "Klue",
+    "website_url": "https://klue.com",
+    "g2_slug": "klue",
+    "capterra_slug": "klue",
+    "trustpilot_slug": "klue.com",
+    "careers_url": "https://klue.com/careers",
+    "rationale": "AI-powered competitive enablement platform for mid-to-enterprise SaaS teams that aggregates competitor intelligence and delivers battlecards — a direct upper-market competitor."
+  },
+  {
+    "name": "Kompyte",
+    "website_url": "https://www.kompyte.com",
+    "g2_slug": "kompyte",
+    "capterra_slug": "kompyte",
+    "trustpilot_slug": "kompyte.com",
+    "careers_url": "https://www.kompyte.com/careers",
+    "rationale": "Automated competitor tracking tool that monitors website changes, ads, and reviews and generates battlecards, directly overlapping with AIS Market's core feature set."
+  },
+  {
+    "name": "Similarweb",
+    "website_url": "https://www.similarweb.com",
+    "g2_slug": "similarweb",
+    "capterra_slug": "similarweb",
+    "trustpilot_slug": "similarweb.com",
+    "careers_url": "https://www.similarweb.com/corp/careers",
+    "rationale": "Widely used competitor and market intelligence platform offering traffic, audience, and digital strategy insights that product and marketing teams use as a competitive research tool."
+  },
+  {
+    "name": "Owler",
+    "website_url": "https://www.owler.com",
+    "g2_slug": "owler",
+    "capterra_slug": "owler",
+    "trustpilot_slug": "owler.com",
+    "careers_url": "https://www.owler.com/aboutUs/careers",
+    "rationale": "Freemium competitive intelligence platform delivering news alerts and company insights on competitors, targeting the same mid-market teams with limited CI budgets."
+  },
+  {
+    "name": "Contify",
+    "website_url": "https://www.contify.com",
+    "g2_slug": "contify",
+    "capterra_slug": "contify",
+    "trustpilot_slug": "contify.com",
+    "careers_url": "https://www.contify.com/careers",
+    "rationale": "Market and competitive intelligence platform that aggregates and curates competitor signals into reports for product and marketing teams, directly competing on automated CI delivery."
+  },
+  {
+    "name": "Battlecards by Workbooks (formerly Compete IQ / Battlecards.io)",
+    "website_url": "https://www.competecards.com",
+    "g2_slug": "compete-iq",
+    "capterra_slug": "competeiq",
+    "trustpilot_slug": "competecards.com",
+    "careers_url": "https://www.competecards.com/careers",
+    "rationale": "Competitive battlecard and intelligence tool aimed at sales and marketing teams at SaaS companies who need structured competitor insights without enterprise-level investment."
+  },
+  {
+    "name": "Wappalyzer",
+    "website_url": "https://www.wappalyzer.com",
+    "g2_slug": "wappalyzer",
+    "capterra_slug": "wappalyzer",
+    "trustpilot_slug": "wappalyzer.com",
+    "careers_url": "https://www.wappalyzer.com/about",
+    "rationale": "Technology intelligence and competitor tracking tool used by SaaS marketers to monitor competitor tech stacks and website signals, partially overlapping with AIS Market's website monitoring use case."
+  },
+  {
+    "name": "SpyFu",
+    "website_url": "https://www.spyfu.com",
+    "g2_slug": "spyfu",
+    "capterra_slug": "spyfu",
+    "trustpilot_slug": "spyfu.com",
+    "careers_url": "https://www.spyfu.com/company/careers",
+    "rationale": "Affordable competitor research tool focused on SEO and PPC intelligence, used by marketing teams as a low-cost alternative to enterprise CI platforms."
+  },
+  {
+    "name": "SEMrush",
+    "website_url": "https://www.semrush.com",
+    "g2_slug": "semrush",
+    "capterra_slug": "semrush",
+    "trustpilot_slug": "semrush.com",
+    "careers_url": "https://www.semrush.com/company/career",
+    "rationale": "Dominant digital marketing intelligence suite used by SaaS teams to track competitor online presence, content, and advertising — a frequent DIY substitute for dedicated CI tools."
+  },
+  {
+    "name": "G2 Market Intelligence",
+    "website_url": "https://sell.g2.com/market-intelligence",
+    "g2_slug": "g2-market-intelligence",
+    "capterra_slug": "g2-market-intelligence",
+    "trustpilot_slug": "g2.com",
+    "careers_url": "https://www.g2.com/about/careers",
+    "rationale": "G2's buyer intent and competitive intelligence product tracks competitor review trends and category positioning, targeting the same product and marketing teams at mid-size SaaS companies."
+  },
+  {
+    "name": "Visualping",
+    "website_url": "https://visualping.io",
+    "g2_slug": "visualping",
+    "capterra_slug": "visualping",
+    "trustpilot_slug": "visualping.io",
+    "careers_url": "https://visualping.io/careers",
+    "rationale": "Website change monitoring tool used by SaaS teams to track competitor website updates automatically, directly overlapping with AIS Market's competitor website messaging tracking feature."
+  }
+]

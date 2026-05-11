@@ -34,3 +34,17 @@ Thumbs.db
 *.tmp
 *.temp
 *.log
+# WAT Framework
+First Agentic Workflow/.env
+First Agentic Workflow/credentials.json
+First Agentic Workflow/token.json
+First Agentic Workflow/.tmp/
+YouTube Analysis/.env
+YouTube Analysis/credentials.json
+YouTube Analysis/token.json
+YouTube Analysis/.tmp/
+
+# Embedding Demo — keep API keys and large media out of git
+Embedding Demo/.env
+Embedding Demo/data/
+Embedding Demo/__pycache__/

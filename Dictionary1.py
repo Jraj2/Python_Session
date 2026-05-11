@@ -25,3 +25,29 @@ print(student_info)
 empty_dict ={}
 empty_dict["City"] = "Bangalore"
 print(empty_dict)
+
+# Nested dictionary example
+nested_dict = {
+    "student1": {"name": "Alice", "age": 20},
+    "student2": {"name": "Bob", "age": 22}
+}
+print(nested_dict)
+print(nested_dict["student1"])
+
+# Print keys and values separately
+print(student_ages.keys())
+
+#Print values
+print(student_ages.values())
+
+# Example of sets in Python
+collection ={1,2,3,5,5,"hello","world","world",9}
+print("Set collection:",collection)
+print(type(collection))
+print("Length of set collection:",len(collection))
+
+#Create an empty set
+empty_set = set()
+print("Empty set:",empty_set)
+print("Type of empty set:",type(empty_set))
+

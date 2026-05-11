@@ -1,0 +1,28 @@
+{
+  "product_name": "AIS Market",
+  "product_description": "AIS Market is an AI-powered competitor intelligence platform that automatically researches competitors every week and delivers branded, actionable reports. It tracks competitor website messaging, pricing changes, customer reviews, and hiring signals — then uses AI to synthesize what it all means for your business.",
+  "target_customer": "Product managers and marketing teams at mid-size SaaS companies who need reliable competitive intelligence but don't have a dedicated analyst or the budget for enterprise tools like Crayon or Klue.",
+  "primary_value_prop": "Get a full weekly competitor report — website changes, pricing, reviews, job postings, and AI-generated insights — delivered automatically to Google Sheets and a branded HTML report. No analysts, no manual Googling, no expensive enterprise contract.",
+  "pricing_model": "freemium",
+  "geography": "Global, English-language SaaS markets",
+  "stage": "pre-launch",
+  "website_url": "",
+  "key_differentiators": [
+    "AI-powered synthesis using Claude — not just raw data, but actual strategic insight",
+    "Freemium pricing — accessible to startups and small teams, not just enterprise budgets",
+    "Zero analyst required — one person can set it up and run it weekly",
+    "Branded deliverables — reports carry your company identity, not a generic tool logo",
+    "Simple WAT architecture — transparent, auditable, and customizable without vendor lock-in"
+  ],
+  "known_competitors": [
+    "Crayon",
+    "Klue",
+    "Kompyte",
+    "Similarweb",
+    "SpyFu",
+    "SEMrush",
+    "Owler",
+    "Contify"
+  ],
+  "competitive_positioning": "AIS Market sits below enterprise CI tools (Crayon, Klue) on price and complexity, but above manual research and generic SEO tools (SEMrush, SpyFu) on AI-driven insight quality. It targets teams who outgrew spreadsheets but can't justify a $1,000+/month enterprise platform."
+}

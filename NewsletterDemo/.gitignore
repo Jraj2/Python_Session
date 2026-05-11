@@ -1,0 +1,21 @@
+# Secrets
+.env
+credentials.json
+token.json
+
+# Subscriber data (personal data — never commit)
+subscribers.csv
+
+# Temporary processing files
+.tmp/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db

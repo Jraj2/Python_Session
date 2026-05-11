@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multimodal RAG Chat</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0f1117;
+      color: #e8eaf0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      width: 100%;
+      padding: 18px 24px;
+      background: #1a1d27;
+      border-bottom: 1px solid #2a2d3a;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, #6c63ff, #3ecfcf);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+
+    header h1 {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    header span {
+      margin-left: auto;
+      font-size: 12px;
+      color: #6b7280;
+      background: #23263a;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    #chat-window {
+      flex: 1;
+      width: 100%;
+      max-width: 760px;
+      overflow-y: auto;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .bubble {
+      max-width: 75%;
+      padding: 12px 16px;
+      border-radius: 16px;
+      font-size: 14.5px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .bubble.user {
+      align-self: flex-end;
+      background: #6c63ff;
+      color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+
+    .bubble.assistant {
+      align-self: flex-start;
+      background: #1e2130;
+      color: #e8eaf0;
+      border: 1px solid #2a2d3a;
+      border-bottom-left-radius: 4px;
+    }
+
+    .bubble.typing {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      padding: 14px 18px;
+    }
+
+    .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #6b7280;
+      animation: bounce 1.2s infinite;
+    }
+    .dot:nth-child(2) { animation-delay: 0.2s; }
+    .dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes bounce {
+      0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+      40%            { transform: translateY(-6px); opacity: 1; }
+    }
+
+    #input-area {
+      width: 100%;
+      max-width: 760px;
+      padding: 16px;
+      display: flex;
+      gap: 10px;
+    }
+
+    #msg-input {
+      flex: 1;
+      background: #1e2130;
+      border: 1px solid #2a2d3a;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: #e8eaf0;
+      outline: none;
+      resize: none;
+      transition: border-color 0.2s;
+      font-family: inherit;
+      max-height: 120px;
+      overflow-y: auto;
+    }
+
+    #msg-input::placeholder { color: #4b5563; }
+    #msg-input:focus { border-color: #6c63ff; }
+
+    #send-btn {
+      background: linear-gradient(135deg, #6c63ff, #3ecfcf);
+      border: none;
+      border-radius: 12px;
+      width: 48px;
+      height: 48px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+
+    #send-btn:hover  { opacity: 0.88; }
+    #send-btn:active { transform: scale(0.95); }
+    #send-btn:disabled { opacity: 0.4; cursor: default; }
+
+    #send-btn svg { width: 20px; height: 20px; fill: #fff; }
+
+    .welcome {
+      align-self: center;
+      text-align: center;
+      color: #4b5563;
+      margin-top: 60px;
+    }
+    .welcome h2 { font-size: 22px; margin-bottom: 8px; color: #6b7280; }
+    .welcome p  { font-size: 13px; }
+
+    .media-bubble {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 10px 14px;
+    }
+
+    .media-bubble img,
+    .media-bubble video {
+      max-width: 100%;
+      border-radius: 10px;
+      display: block;
+    }
+
+    .media-label {
+      font-size: 11px;
+      color: #6b7280;
+      margin-bottom: 2px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🔍</div>
+  <h1>Multimodal RAG Chat</h1>
+  <span>Nemotron · Gemini Embeddings · Pinecone</span>
+</header>
+
+<div id="chat-window">
+  <div class="welcome">
+    <h2>Ask anything</h2>
+    <p>Searches your indexed text, images &amp; videos then answers with Claude Opus.</p>
+  </div>
+</div>
+
+<div id="input-area">
+  <textarea id="msg-input" rows="1" placeholder="Ask about your media..."></textarea>
+  <button id="send-btn" title="Send">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+    </svg>
+  </button>
+</div>
+
+<script>
+  const chatWindow = document.getElementById("chat-window");
+  const input      = document.getElementById("msg-input");
+  const sendBtn    = document.getElementById("send-btn");
+
+  function addBubble(text, role) {
+    const el = document.createElement("div");
+    el.className = `bubble ${role}`;
+    el.textContent = text;
+    chatWindow.appendChild(el);
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+    return el;
+  }
+
+  function addTyping() {
+    const el = document.createElement("div");
+    el.className = "bubble assistant typing";
+    el.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+    chatWindow.appendChild(el);
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+    return el;
+  }
+
+  function removeWelcome() {
+    const w = document.querySelector(".welcome");
+    if (w) w.remove();
+  }
+
+  async function send() {
+    const message = input.value.trim();
+    if (!message) return;
+
+    removeWelcome();
+    input.value = "";
+    input.style.height = "auto";
+    sendBtn.disabled = true;
+
+    addBubble(message, "user");
+    const typing = addTyping();
+
+    try {
+      const res  = await fetch("/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message }),
+      });
+      const data = await res.json();
+      typing.remove();
+      addBubble(data.answer || data.error || "No response.", "assistant");
+
+      if (data.media && data.media.length > 0) {
+        const mediaEl = document.createElement("div");
+        mediaEl.className = "bubble assistant media-bubble";
+        data.media.forEach(item => {
+          const wrapper = document.createElement("div");
+          const label = document.createElement("div");
+          label.className = "media-label";
+          label.textContent = item.description || item.source;
+          wrapper.appendChild(label);
+          if (item.content_type === "image") {
+            const img = document.createElement("img");
+            img.src = `/data/${item.source}`;
+            img.alt = item.description || item.source;
+            wrapper.appendChild(img);
+          } else if (item.content_type === "video") {
+            const vid = document.createElement("video");
+            vid.src = `/data/${item.source}`;
+            vid.controls = true;
+            wrapper.appendChild(vid);
+          }
+          mediaEl.appendChild(wrapper);
+        });
+        chatWindow.appendChild(mediaEl);
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+      }
+    } catch (err) {
+      typing.remove();
+      addBubble("Error connecting to server.", "assistant");
+    }
+
+    sendBtn.disabled = false;
+    input.focus();
+  }
+
+  sendBtn.addEventListener("click", send);
+
+  input.addEventListener("keydown", e => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      send();
+    }
+  });
+
+  input.addEventListener("input", () => {
+    input.style.height = "auto";
+    input.style.height = Math.min(input.scrollHeight, 120) + "px";
+  });
+</script>
+
+</body>
+</html>

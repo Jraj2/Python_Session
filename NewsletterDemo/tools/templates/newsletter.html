@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ subject }}</title>
+<!--
+  Premailer will inline all styles below before sending.
+  Keep styles simple — avoid shorthand properties, flexbox, grid (Outlook doesn't support them).
+-->
+<style>
+  body { margin: 0; padding: 0; background-color: #F1F5F9; font-family: Georgia, 'Times New Roman', serif; color: #1E293B; }
+  .wrapper { width: 100%; background-color: #F1F5F9; padding: 32px 0; }
+  .container { max-width: 620px; margin: 0 auto; background-color: #FFFFFF; border-radius: 8px; overflow: hidden; }
+
+  /* Header */
+  .header { background-color: #1E293B; padding: 36px 40px 28px; text-align: center; }
+  .header-label { font-family: Arial, Helvetica, sans-serif; font-size: 11px; font-weight: bold; letter-spacing: 3px; text-transform: uppercase; color: #94A3B8; margin: 0 0 10px; }
+  .header-title { font-size: 28px; font-weight: bold; color: #F8FAFC; margin: 0 0 8px; line-height: 1.2; }
+  .header-subtitle { font-size: 15px; color: #94A3B8; margin: 0; font-style: italic; }
+
+  /* Issue meta */
+  .meta { background-color: #F8FAFC; padding: 14px 40px; border-bottom: 1px solid #E2E8F0; }
+  .meta p { font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #64748B; margin: 0; }
+
+  /* Body */
+  .body { padding: 36px 40px; }
+
+  /* Intro */
+  .intro { font-size: 17px; line-height: 1.7; color: #334155; margin: 0 0 32px; }
+
+  /* Section divider */
+  .section-divider { border: none; border-top: 2px solid #E2E8F0; margin: 32px 0; }
+
+  /* Story block */
+  .story { margin-bottom: 36px; }
+  .story-tag { font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; color: #3B82F6; margin: 0 0 6px; }
+  .story-headline { font-size: 20px; font-weight: bold; color: #1E293B; margin: 0 0 10px; line-height: 1.3; }
+  .story-body { font-size: 15px; line-height: 1.75; color: #475569; margin: 0 0 12px; }
+  .story-source { font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #94A3B8; margin: 0; }
+  .story-source a { color: #3B82F6; text-decoration: none; }
+
+  /* Chart block */
+  .chart-block { margin: 24px 0; text-align: center; background-color: #F8FAFC; border-radius: 6px; padding: 16px; }
+  .chart-block img { max-width: 100%; height: auto; border-radius: 4px; }
+  .chart-caption { font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #64748B; margin: 10px 0 0; font-style: italic; }
+
+  /* Key takeaway box */
+  .takeaway { background-color: #EFF6FF; border-left: 4px solid #3B82F6; border-radius: 0 6px 6px 0; padding: 16px 20px; margin: 28px 0; }
+  .takeaway-label { font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; color: #3B82F6; margin: 0 0 6px; }
+  .takeaway p { font-size: 15px; line-height: 1.65; color: #1E40AF; margin: 0; font-weight: bold; }
+
+  /* Footer */
+  .footer { background-color: #1E293B; padding: 28px 40px; text-align: center; }
+  .footer p { font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #64748B; margin: 0 0 6px; line-height: 1.6; }
+  .footer a { color: #94A3B8; text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <table class="container" cellpadding="0" cellspacing="0" width="620" align="center">
+
+    <!-- HEADER -->
+    <tr>
+      <td class="header">
+        <p class="header-label">{{ newsletter_name }}</p>
+        <h1 class="header-title">{{ subject }}</h1>
+        <p class="header-subtitle">{{ tagline }}</p>
+      </td>
+    </tr>
+
+    <!-- META -->
+    <tr>
+      <td class="meta">
+        <p>Issue #{{ issue_number }} &nbsp;·&nbsp; {{ issue_date }} &nbsp;·&nbsp; {{ read_time }} min read</p>
+      </td>
+    </tr>
+
+    <!-- BODY -->
+    <tr>
+      <td class="body">
+
+        <!-- Intro -->
+        <p class="intro">{{ intro }}</p>
+
+        <hr class="section-divider">
+
+        <!-- Stories -->
+        {% for story in stories %}
+        <div class="story">
+          <p class="story-tag">{{ story.tag }}</p>
+          <h2 class="story-headline">{{ story.headline }}</h2>
+          <p class="story-body">{{ story.body }}</p>
+          {% if story.source_url %}
+          <p class="story-source">Source: <a href="{{ story.source_url }}">{{ story.source_title }}</a></p>
+          {% endif %}
+        </div>
+
+        {% if story.chart_url %}
+        <div class="chart-block">
+          <img src="{{ story.chart_url }}" alt="{{ story.chart_caption }}" width="540">
+          <p class="chart-caption">{{ story.chart_caption }}</p>
+        </div>
+        {% endif %}
+
+        {% if story.takeaway %}
+        <div class="takeaway">
+          <p class="takeaway-label">Key Takeaway</p>
+          <p>{{ story.takeaway }}</p>
+        </div>
+        {% endif %}
+
+        {% if not loop.last %}<hr class="section-divider">{% endif %}
+        {% endfor %}
+
+        <hr class="section-divider">
+
+        <!-- Closing -->
+        <p class="intro" style="font-size:15px;">{{ closing }}</p>
+
+      </td>
+    </tr>
+
+    <!-- FOOTER -->
+    <tr>
+      <td class="footer">
+        <p>You're receiving this because you subscribed to <strong style="color:#F8FAFC;">{{ newsletter_name }}</strong>.</p>
+        <p><a href="{{ unsubscribe_url }}">Unsubscribe</a> &nbsp;·&nbsp; <a href="mailto:{{ reply_email }}">Reply to this email</a></p>
+        <p style="margin-top:12px; font-size:11px;">{{ sender_address }}</p>
+      </td>
+    </tr>
+
+  </table>
+</div>
+</body>
+</html>

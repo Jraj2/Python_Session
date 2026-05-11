@@ -1,0 +1,7 @@
+google-genai
+pinecone
+python-dotenv
+openai
+Pillow
+requests
+flask
