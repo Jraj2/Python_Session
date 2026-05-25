@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Solution Limited — Flow · Intelligent Operations</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    @font-face {
+      font-family: "Inter Tight";
+      src: url(https://assets.awwwards.com/assets/fonts/inter-tight/InterTight-VariableFont_wght.ttf) format("truetype");
+      font-weight: 100 900;
+    }
+
+    :root {
+      /* ── BRAND: AI Solution Limited / Flow ── */
+      --font-1: "Plus Jakarta Sans", "Inter Tight", sans-serif;
+      --font-light: 300;
+      --font-normal: 400;
+      --font-medium: 500;
+      --font-bold: 600;
+      --font-extrabold: 700;
+      --font-black: 800;
+
+      /* Brand primary = Navy */
+      --color-primary: #1B2E51;
+      --color-primary-rgb: 27, 46, 81;
+      --color-link: #1B2E51;
+      --color-white: #fff;
+      --color-white-rgb: 255, 255, 255;
+
+      /* Brand accent = Teal (replaces orange) */
+      --color-accent: #00C9A0;
+      --color-orange: #00C9A0;
+      --color-errors: #FA5D29;
+
+      /* Brand blues */
+      --color-ocean: #2465A8;
+      --color-blue: #4A9FD5;
+      --color-sky: #4A9FD5;
+      --color-ice: #E1F0FA;
+
+      --text-size-small: 11px;
+      --text-size-primary: 14px;
+      --text-size-medium: 18px;
+      --text-size-large: 22px;
+
+      /* Brand backgrounds */
+      --bg-primary: #F5F8FC;
+      --bg-primary-rgb: 245, 248, 252;
+      --bg-secondary: #1B2E51;
+      --bg-3rd: #E1F0FA;
+      --bg-4rd: #F5F8FC;
+      --bg-white: #fff;
+      --border-gray: #dde6f0;
+
+      --innerWidth: 1200px;
+      --header-height: 52px;
+      --pad-inner: 60px;
+
+      --button-rounded: 8px;
+      --button-rounded-full: 72px;
+      --button-height: 48px;
+      --button-pad: 24px;
+      --button-bg: var(--color-primary);
+      --button-color: var(--color-white);
+
+      /* Category dot colours — mapped to brand palette */
+      --color-connect: #00C9A0;
+      --color-inspire: #00C9A0;
+      --color-awards: #2465A8;
+      --color-read: #4A9FD5;
+      --color-learn: #E1F0FA;
+      --color-jobs: #4A9FD5;
+    }
+
+    html { scroll-behavior: smooth; font-size: var(--text-size-primary); }
+    *, *:before, *:after { box-sizing: border-box; }
+    * { margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-1);
+      font-size: var(--text-size-primary);
+      font-weight: var(--font-light);
+      background: var(--bg-primary);
+      color: var(--color-primary);
+      line-height: 200%;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── TOP BAR ── */
+    .top-bar {
+      background: var(--bg-secondary);
+      color: rgba(255,255,255,0.55);
+      font-size: 11px;
+      font-weight: var(--font-normal);
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--pad-inner);
+      letter-spacing: 0.02em;
+    }
+    .top-bar-left { display: flex; gap: 24px; }
+    .top-bar-right { display: flex; gap: 20px; }
+    .top-bar a { color: rgba(255,255,255,0.55); transition: color 0.15s; }
+    .top-bar a:hover { color: #fff; }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--bg-white);
+      border-bottom: 1px solid var(--border-gray);
+      height: var(--header-height);
+      display: flex; align-items: center;
+      padding: 0 var(--pad-inner);
+      gap: 32px;
+    }
+
+    .header-logo {
+      display: flex; align-items: center; gap: 10px;
+      flex-shrink: 0;
+    }
+    .header-logo img {
+      height: 32px;
+    }
+
+    .header-nav {
+      display: flex; align-items: center; gap: 2px;
+      flex: 1;
+    }
+    .header-nav a {
+      font-size: 13px;
+      font-weight: var(--font-medium);
+      color: var(--color-primary);
+      padding: 6px 12px;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+    .header-nav a:hover { background: var(--bg-3rd); }
+    .header-nav a.active { background: var(--color-primary); color: #fff; }
+
+    .header-right {
+      display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+    }
+    .btn-outline {
+      height: 34px; padding: 0 16px;
+      border: 1.5px solid var(--border-gray);
+      border-radius: var(--button-rounded);
+      font-size: 13px; font-weight: var(--font-medium);
+      font-family: var(--font-1);
+      background: transparent; color: var(--color-primary);
+      cursor: pointer; white-space: nowrap;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .btn-outline:hover { background: var(--bg-3rd); }
+    .btn-solid {
+      height: 34px; padding: 0 16px;
+      border: none; border-radius: var(--button-rounded);
+      font-size: 13px; font-weight: var(--font-medium);
+      font-family: var(--font-1);
+      background: var(--color-primary); color: #fff;
+      cursor: pointer; white-space: nowrap;
+      transition: opacity 0.15s;
+    }
+    .btn-solid:hover { opacity: 0.82; }
+
+    /* ── SECONDARY NAV (filter bar) ── */
+    .secondary-nav {
+      background: var(--bg-white);
+      border-bottom: 1px solid var(--border-gray);
+      padding: 0 var(--pad-inner);
+      height: 44px;
+      display: flex; align-items: center; gap: 4px;
+      overflow-x: auto;
+    }
+    .secondary-nav::-webkit-scrollbar { display: none; }
+    .snav-item {
+      font-size: 12px; font-weight: var(--font-medium);
+      padding: 5px 12px; border-radius: 100px;
+      white-space: nowrap; cursor: pointer;
+      color: rgba(34,34,34,0.55);
+      transition: background 0.15s, color 0.15s;
+    }
+    .snav-item:hover { background: var(--bg-3rd); color: var(--color-primary); }
+    .snav-item.active { background: var(--color-primary); color: #fff; }
+    .snav-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      display: inline-block; margin-right: 5px; vertical-align: middle;
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .page-inner {
+      max-width: var(--innerWidth);
+      margin: 0 auto;
+      padding: 0 var(--pad-inner);
+    }
+
+    /* ── SITE SHOWCASE HERO ── */
+    .showcase-header {
+      padding: 32px 0 20px;
+      display: flex; align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .showcase-meta { display: flex; flex-direction: column; gap: 4px; }
+    .showcase-breadcrumb {
+      font-size: 11px; font-weight: var(--font-normal);
+      color: rgba(34,34,34,0.4); letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .showcase-title {
+      font-size: 28px; font-weight: var(--font-black);
+      letter-spacing: -0.03em; line-height: 1.15;
+    }
+    .showcase-agency {
+      font-size: 12px; color: rgba(34,34,34,0.5); margin-top: 2px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .agency-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--color-orange); display: inline-block;
+    }
+    .showcase-actions { display: flex; gap: 8px; padding-top: 4px; }
+
+    /* ── HERO PREVIEW ── */
+    .hero-preview {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #0a0a14;
+      cursor: pointer;
+    }
+    .hero-preview-img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+    }
+    .hero-preview-overlay {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(5, 5, 18, 0.35);
+    }
+    .hero-preview-text {
+      text-align: center;
+      color: #fff;
+      font-size: clamp(1.5rem, 3.5vw, 2.8rem);
+      font-weight: var(--font-black);
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      max-width: 620px;
+      padding: 0 2rem;
+      text-shadow: 0 2px 32px rgba(0,0,0,0.5);
+    }
+    .hero-preview-badge {
+      position: absolute; top: 18px; right: 18px;
+      background: var(--color-orange);
+      color: #fff; font-size: 11px; font-weight: var(--font-bold);
+      padding: 4px 10px; border-radius: 100px;
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .hero-preview-play {
+      position: absolute; bottom: 18px; left: 18px;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 100px;
+      padding: 7px 16px;
+      color: #fff; font-size: 12px; font-weight: var(--font-medium);
+      display: flex; align-items: center; gap: 7px;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .hero-preview-play:hover { background: rgba(255,255,255,0.2); }
+
+    /* UI mockup inside hero */
+    .hero-ui-mockup {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, #081528 0%, #0d1e36 60%, #06101e 100%);
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      overflow: hidden;
+    }
+    .ui-sidebar {
+      background: rgba(255,255,255,0.03);
+      border-right: 1px solid rgba(255,255,255,0.05);
+      padding: 24px 16px;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .ui-sidebar-item {
+      height: 28px; border-radius: 6px;
+      background: rgba(255,255,255,0.04);
+      display: flex; align-items: center; padding: 0 12px;
+      gap: 8px; font-size: 11px; color: rgba(255,255,255,0.35);
+    }
+    .ui-sidebar-item.active {
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.75);
+    }
+    .ui-sidebar-dot { width: 6px; height: 6px; border-radius: 50%; }
+    .ui-main { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+    .ui-topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 4px;
+    }
+    .ui-title-text {
+      font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.7);
+      letter-spacing: -0.02em;
+    }
+    .ui-pill {
+      height: 22px; padding: 0 10px; border-radius: 100px;
+      font-size: 10px; font-weight: 600; display: inline-flex; align-items: center;
+    }
+    .ui-pill-green { background: rgba(0,201,160,0.14); color: #00C9A0; }
+    .ui-pill-blue { background: rgba(74,159,213,0.14); color: #4A9FD5; }
+    .ui-pill-orange { background: rgba(0,201,160,0.14); color: #00C9A0; }
+    .ui-cards-row { display: flex; gap: 12px; }
+    .ui-card {
+      flex: 1; border-radius: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.05);
+      padding: 14px;
+    }
+    .ui-card-label { font-size: 10px; color: rgba(255,255,255,0.3); margin-bottom: 4px; }
+    .ui-card-value {
+      font-size: 18px; font-weight: 800; color: #fff;
+      letter-spacing: -0.03em; line-height: 1;
+    }
+    .ui-card-delta { font-size: 10px; color: #00C9A0; margin-top: 3px; }
+    .ui-chart-row { display: flex; gap: 12px; flex: 1; }
+    .ui-chart-box {
+      flex: 2; border-radius: 10px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      padding: 14px; position: relative; overflow: hidden;
+    }
+    .ui-chart-label { font-size: 10px; color: rgba(255,255,255,0.3); margin-bottom: 10px; }
+    .ui-bars {
+      display: flex; align-items: flex-end; gap: 4px;
+      height: 60px;
+    }
+    .ui-bar {
+      flex: 1; border-radius: 3px 3px 0 0;
+      background: rgba(74,159,213,0.25);
+      min-height: 8px;
+      transition: background 0.2s;
+    }
+    .ui-bar.highlight { background: rgba(74,159,213,0.75); }
+    .ui-list-box {
+      flex: 1; border-radius: 10px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      padding: 14px; display: flex; flex-direction: column; gap: 8px;
+    }
+    .ui-list-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .ui-list-row:last-child { border: none; }
+    .ui-list-label { font-size: 10px; color: rgba(255,255,255,0.4); }
+    .ui-list-val { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.65); }
+
+    /* ── SITE DESCRIPTION ── */
+    .site-desc {
+      padding: 28px 0 36px;
+      display: grid; grid-template-columns: 1fr 280px; gap: 48px;
+      border-bottom: 1px solid var(--border-gray);
+    }
+    .site-desc-text {
+      font-size: 14px; font-weight: var(--font-normal);
+      color: rgba(34,34,34,0.65); line-height: 1.85;
+    }
+    .site-desc-meta { display: flex; flex-direction: column; gap: 16px; }
+    .meta-group-label {
+      font-size: 10px; font-weight: var(--font-bold);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(34,34,34,0.35); margin-bottom: 4px;
+    }
+    .meta-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .meta-tag {
+      font-size: 11px; font-weight: var(--font-medium);
+      padding: 4px 10px; border-radius: 100px;
+      border: 1px solid var(--border-gray);
+      background: #fff; color: var(--color-primary);
+      cursor: pointer; transition: background 0.15s;
+    }
+    .meta-tag:hover { background: var(--bg-3rd); }
+
+    /* ── HIGHLIGHTS ── */
+    .section-block { padding: 40px 0; border-bottom: 1px solid var(--border-gray); }
+    .section-heading {
+      font-size: 22px; font-weight: var(--font-black);
+      letter-spacing: -0.03em; line-height: 1.2;
+      margin-bottom: 24px;
+    }
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .highlight-thumb {
+      border-radius: 8px; overflow: hidden;
+      aspect-ratio: 16/10;
+      background: #0d0d1f;
+      position: relative; cursor: pointer;
+    }
+    .highlight-thumb img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.3s ease;
+    }
+    .highlight-thumb:hover img { transform: scale(1.03); }
+    .highlight-thumb-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 50%);
+      opacity: 0; transition: opacity 0.2s;
+      display: flex; align-items: flex-end; padding: 12px;
+    }
+    .highlight-thumb:hover .highlight-thumb-overlay { opacity: 1; }
+    .thumb-label {
+      font-size: 11px; color: rgba(255,255,255,0.8); font-weight: var(--font-medium);
+    }
+
+    /* Placeholder dark UI cards for thumbnails */
+    .thumb-ui {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      gap: 8px; padding: 14px;
+    }
+    .thumb-ui-bar {
+      height: 8px; border-radius: 4px;
+      background: rgba(255,255,255,0.08);
+    }
+    .thumb-ui-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6px; flex: 1;
+    }
+    .thumb-ui-block {
+      border-radius: 6px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* ── BUILT WITH ── */
+    .built-section { padding: 40px 0; border-bottom: 1px solid var(--border-gray); }
+    .built-label {
+      font-size: 11px; font-weight: var(--font-bold);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(34,34,34,0.35); margin-bottom: 16px;
+    }
+    .built-filters {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;
+    }
+    .built-chip {
+      height: 32px; padding: 0 14px;
+      border-radius: 100px;
+      font-size: 12px; font-weight: var(--font-medium);
+      font-family: var(--font-1);
+      border: 1.5px solid var(--border-gray);
+      background: #fff; color: var(--color-primary);
+      cursor: pointer; display: flex; align-items: center; gap: 6px;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .built-chip:hover { background: var(--bg-3rd); }
+    .built-chip.active { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
+    .chip-icon { font-size: 13px; }
+    .built-tech-row { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tech-tag {
+      height: 28px; padding: 0 12px;
+      border-radius: 100px;
+      font-size: 11px; font-weight: var(--font-medium);
+      background: var(--bg-3rd); color: var(--color-primary);
+      display: flex; align-items: center; gap: 5px;
+      cursor: pointer; transition: background 0.15s;
+    }
+    .tech-tag:hover { background: #e0e0e0; }
+
+    /* ── CREATORS TABLE ── */
+    .creators-section { padding: 40px 0; border-bottom: 1px solid var(--border-gray); }
+    .creators-table { width: 100%; border-collapse: collapse; }
+    .creators-table thead tr {
+      border-bottom: 1px solid var(--border-gray);
+    }
+    .creators-table th {
+      font-size: 10px; font-weight: var(--font-bold);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(34,34,34,0.35); padding: 0 0 10px;
+      text-align: left;
+    }
+    .creators-table th:not(:first-child) { text-align: center; }
+    .creators-table td {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border-gray);
+      font-size: 13px; vertical-align: middle;
+    }
+    .creators-table tr:last-child td { border-bottom: none; }
+    .creator-cell { display: flex; align-items: center; gap: 12px; }
+    .creator-avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      object-fit: cover; flex-shrink: 0;
+      background: var(--bg-3rd);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: var(--font-bold); color: rgba(34,34,34,0.4);
+      overflow: hidden;
+    }
+    .creator-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .creator-name {
+      font-weight: var(--font-bold); font-size: 13px;
+      letter-spacing: -0.01em;
+    }
+    .creator-handle { font-size: 11px; color: rgba(34,34,34,0.4); }
+    .creator-flag { font-size: 16px; }
+    .score-cell {
+      text-align: center;
+      font-size: 13px; font-weight: var(--font-bold);
+      letter-spacing: -0.02em;
+    }
+    .score-cell span {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--bg-3rd); font-size: 13px; font-weight: var(--font-bold);
+    }
+    .score-cell span.top { background: var(--color-primary); color: #fff; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg-secondary);
+      color: rgba(255,255,255,0.5);
+      padding: 48px var(--pad-inner) 32px;
+    }
+    .footer-inner {
+      max-width: var(--innerWidth);
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      gap: 32px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-logo img {
+      height: 28px;
+      filter: brightness(0) invert(1);
+      opacity: 0.7;
+      margin-bottom: 12px;
+    }
+    .footer-tagline {
+      font-size: 12px; line-height: 1.7;
+      color: rgba(255,255,255,0.35); max-width: 220px;
+    }
+    .footer-col-title {
+      font-size: 10px; font-weight: var(--font-bold);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(255,255,255,0.4); margin-bottom: 14px;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer-links a {
+      font-size: 13px; color: rgba(255,255,255,0.45);
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom {
+      padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 11px; color: rgba(255,255,255,0.25);
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom-links { display: flex; gap: 20px; }
+    .footer-bottom-links a { color: rgba(255,255,255,0.25); transition: color 0.15s; }
+    .footer-bottom-links a:hover { color: rgba(255,255,255,0.6); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      :root { --pad-inner: 24px; }
+      .highlights-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .site-desc { grid-template-columns: 1fr; }
+      .hero-ui-mockup { grid-template-columns: 1fr; }
+      .ui-sidebar { display: none; }
+    }
+    @media (max-width: 600px) {
+      .highlights-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .top-bar { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <a href="#">Explore</a>
+      <a href="#">Directory</a>
+      <a href="#">Awards</a>
+      <a href="#">Jobs</a>
+    </div>
+    <div class="top-bar-right">
+      <a href="#">Submit a Site</a>
+      <a href="#">Advertise</a>
+      <a href="#">Log in</a>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-logo">
+      <img src="brand_assets/brandlogo.png" alt="Flow — AI Solution Limited" />
+    </div>
+    <nav class="header-nav">
+      <a href="#" class="active">Explore</a>
+      <a href="#">Directory</a>
+      <a href="#">Compete</a>
+      <a href="#">Blog</a>
+      <a href="#">Jobs</a>
+      <a href="#">Learn</a>
+    </nav>
+    <div class="header-right">
+      <button class="btn-outline">Submit a Site</button>
+      <button class="btn-solid">Sign Up</button>
+    </div>
+  </header>
+
+  <!-- SECONDARY NAV -->
+  <div class="secondary-nav">
+    <div class="snav-item active">
+      <span class="snav-dot" style="background:var(--color-orange);"></span>Site of the Day
+    </div>
+    <div class="snav-item">
+      <span class="snav-dot" style="background:var(--color-inspire);"></span>Inspiration
+    </div>
+    <div class="snav-item">
+      <span class="snav-dot" style="background:var(--color-awards);"></span>Awards
+    </div>
+    <div class="snav-item">
+      <span class="snav-dot" style="background:var(--color-blue);"></span>Case Studies
+    </div>
+    <div class="snav-item">
+      <span class="snav-dot" style="background:var(--color-read);"></span>Experiments
+    </div>
+    <div class="snav-item">
+      <span class="snav-dot" style="background:var(--color-learn);"></span>Tutorials
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="page-inner">
+
+    <!-- SHOWCASE HEADER -->
+    <div class="showcase-header">
+      <div class="showcase-meta">
+        <div class="showcase-breadcrumb">Site of the Day &nbsp;·&nbsp; 25 May 2026</div>
+        <h1 class="showcase-title">Flow — Intelligent Operations</h1>
+        <div class="showcase-agency">
+          <span class="agency-dot"></span>
+          By AI Solution Limited
+        </div>
+      </div>
+      <div class="showcase-actions">
+        <button class="btn-outline">&#9654; Preview</button>
+        <button class="btn-solid">Visit Site &rarr;</button>
+      </div>
+    </div>
+
+    <!-- HERO PREVIEW -->
+    <div class="hero-preview">
+      <div class="hero-ui-mockup">
+        <!-- Sidebar -->
+        <div class="ui-sidebar">
+          <div style="height:24px;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+            <div style="width:18px;height:18px;border-radius:4px;background:rgba(74,159,213,0.5);"></div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.5);font-weight:700;">FLOW</div>
+          </div>
+          <div class="ui-sidebar-item active">
+            <div class="ui-sidebar-dot" style="background:rgba(74,159,213,0.7);"></div> Dashboard
+          </div>
+          <div class="ui-sidebar-item">
+            <div class="ui-sidebar-dot" style="background:rgba(255,255,255,0.15);"></div> Analytics
+          </div>
+          <div class="ui-sidebar-item">
+            <div class="ui-sidebar-dot" style="background:rgba(255,255,255,0.15);"></div> Automation
+          </div>
+          <div class="ui-sidebar-item">
+            <div class="ui-sidebar-dot" style="background:rgba(255,255,255,0.15);"></div> Models
+          </div>
+          <div class="ui-sidebar-item">
+            <div class="ui-sidebar-dot" style="background:rgba(255,255,255,0.15);"></div> Reports
+          </div>
+          <div class="ui-sidebar-item">
+            <div class="ui-sidebar-dot" style="background:rgba(255,255,255,0.15);"></div> Settings
+          </div>
+          <div style="flex:1;"></div>
+          <div style="height:32px;border-radius:8px;background:rgba(0,201,160,0.12);border:1px solid rgba(0,201,160,0.25);display:flex;align-items:center;justify-content:center;font-size:10px;color:rgba(0,201,160,0.85);font-weight:700;">UPGRADE PLAN</div>
+        </div>
+        <!-- Main area -->
+        <div class="ui-main">
+          <div class="ui-topbar">
+            <div class="ui-title-text">Operations Overview</div>
+            <div style="display:flex;gap:6px;">
+              <div class="ui-pill ui-pill-green">&#9679; Live</div>
+              <div class="ui-pill ui-pill-blue">Q2 2026</div>
+            </div>
+          </div>
+          <div class="ui-cards-row">
+            <div class="ui-card">
+              <div class="ui-card-label">Revenue Tracked</div>
+              <div class="ui-card-value">$2.4M</div>
+              <div class="ui-card-delta">&#8593; 18.4% vs last month</div>
+            </div>
+            <div class="ui-card">
+              <div class="ui-card-label">Tasks Automated</div>
+              <div class="ui-card-value">84K</div>
+              <div class="ui-card-delta" style="color:#4A9FD5;">&#8593; 32% this quarter</div>
+            </div>
+            <div class="ui-card">
+              <div class="ui-card-label">AI Accuracy</div>
+              <div class="ui-card-value">98.7%</div>
+              <div class="ui-card-delta">&#8593; +2.4% this week</div>
+            </div>
+            <div class="ui-card">
+              <div class="ui-card-label">Cost Saved</div>
+              <div class="ui-card-value">$142K</div>
+              <div class="ui-card-delta" style="color:#00C9A0;">&#8595; 31% overhead</div>
+            </div>
+          </div>
+          <div class="ui-chart-row">
+            <div class="ui-chart-box">
+              <div class="ui-chart-label">Performance · Last 14 days</div>
+              <div class="ui-bars">
+                <div class="ui-bar" style="height:30%;"></div>
+                <div class="ui-bar" style="height:55%;"></div>
+                <div class="ui-bar" style="height:40%;"></div>
+                <div class="ui-bar" style="height:70%;"></div>
+                <div class="ui-bar" style="height:50%;"></div>
+                <div class="ui-bar" style="height:85%;"></div>
+                <div class="ui-bar highlight" style="height:95%;"></div>
+                <div class="ui-bar" style="height:75%;"></div>
+                <div class="ui-bar" style="height:60%;"></div>
+                <div class="ui-bar" style="height:80%;"></div>
+                <div class="ui-bar" style="height:65%;"></div>
+                <div class="ui-bar highlight" style="height:100%;"></div>
+                <div class="ui-bar" style="height:90%;"></div>
+                <div class="ui-bar" style="height:72%;"></div>
+              </div>
+            </div>
+            <div class="ui-list-box">
+              <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-bottom:4px;">Top Workflows</div>
+              <div class="ui-list-row">
+                <span class="ui-list-label">Lead Scoring</span>
+                <span class="ui-list-val">&#9679; Active</span>
+              </div>
+              <div class="ui-list-row">
+                <span class="ui-list-label">Invoice Processing</span>
+                <span class="ui-list-val">&#9679; Active</span>
+              </div>
+              <div class="ui-list-row">
+                <span class="ui-list-label">Churn Prediction</span>
+                <span class="ui-list-val">&#9679; Running</span>
+              </div>
+              <div class="ui-list-row">
+                <span class="ui-list-label">NLP Classifier</span>
+                <span class="ui-list-val" style="color:rgba(255,255,255,0.3);">&#9675; Staging</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Overlay text -->
+      <div class="hero-preview-overlay">
+        <div class="hero-preview-text">
+          Your strategic co-pilot for<br />intelligent, profitable operations
+        </div>
+      </div>
+      <div class="hero-preview-badge">Site of the Day</div>
+      <div class="hero-preview-play">
+        <span>&#9654;</span> Watch overview
+      </div>
+    </div>
+
+    <!-- SITE DESCRIPTION -->
+    <div class="site-desc">
+      <p class="site-desc-text">
+        Flow by AI Solution Limited is an enterprise-grade AI operations platform for organisations that want real leverage from their data. A clear, high-craft site with a premium dark identity and structured content architecture built to establish trust and convert enterprise decision-makers.
+      </p>
+      <div class="site-desc-meta">
+        <div>
+          <div class="meta-group-label">Category</div>
+          <div class="meta-tags">
+            <span class="meta-tag">Technology</span>
+            <span class="meta-tag">SaaS</span>
+            <span class="meta-tag">AI / ML</span>
+          </div>
+        </div>
+        <div>
+          <div class="meta-group-label">Tags</div>
+          <div class="meta-tags">
+            <span class="meta-tag">Animation</span>
+            <span class="meta-tag">Dark UI</span>
+            <span class="meta-tag">Data Viz</span>
+            <span class="meta-tag">Microinteractions</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HIGHLIGHTS -->
+    <div class="section-block">
+      <h2 class="section-heading">See the highlights<br />of this website.</h2>
+      <div class="highlights-grid">
+
+        <div class="highlight-thumb" style="background:#061020;">
+          <div class="thumb-ui" style="background:linear-gradient(135deg,#081528,#0d1e36);">
+            <div class="thumb-ui-bar" style="width:60%;"></div>
+            <div class="thumb-ui-bar" style="width:40%;background:rgba(74,159,213,0.18);"></div>
+            <div class="thumb-ui-grid" style="flex:1;">
+              <div class="thumb-ui-block"></div>
+              <div class="thumb-ui-block" style="background:rgba(74,159,213,0.08);"></div>
+              <div class="thumb-ui-block" style="background:rgba(0,201,160,0.07);"></div>
+              <div class="thumb-ui-block"></div>
+            </div>
+          </div>
+          <div class="highlight-thumb-overlay"><span class="thumb-label">Dashboard Overview</span></div>
+        </div>
+
+        <div class="highlight-thumb" style="background:#061420;">
+          <div class="thumb-ui" style="background:linear-gradient(135deg,#0a1e32,#061420);">
+            <div class="thumb-ui-bar" style="width:80%;background:rgba(36,101,168,0.35);"></div>
+            <div style="flex:1;display:flex;align-items:flex-end;gap:3px;padding-top:12px;">
+              <div style="flex:1;background:rgba(36,101,168,0.2);border-radius:3px 3px 0 0;height:40%;"></div>
+              <div style="flex:1;background:rgba(36,101,168,0.35);border-radius:3px 3px 0 0;height:65%;"></div>
+              <div style="flex:1;background:rgba(36,101,168,0.55);border-radius:3px 3px 0 0;height:85%;"></div>
+              <div style="flex:1;background:rgba(36,101,168,0.75);border-radius:3px 3px 0 0;height:100%;"></div>
+              <div style="flex:1;background:rgba(36,101,168,0.55);border-radius:3px 3px 0 0;height:75%;"></div>
+              <div style="flex:1;background:rgba(36,101,168,0.35);border-radius:3px 3px 0 0;height:55%;"></div>
+            </div>
+          </div>
+          <div class="highlight-thumb-overlay"><span class="thumb-label">Revenue Analytics</span></div>
+        </div>
+
+        <div class="highlight-thumb" style="background:#061a18;">
+          <div class="thumb-ui" style="background:linear-gradient(135deg,#081e1a,#04120f);">
+            <div class="thumb-ui-bar" style="width:50%;background:rgba(0,201,160,0.22);"></div>
+            <div class="thumb-ui-bar" style="width:30%;background:rgba(0,201,160,0.12);margin-top:4px;"></div>
+            <div class="thumb-ui-grid" style="flex:1;margin-top:8px;">
+              <div class="thumb-ui-block" style="background:rgba(0,201,160,0.07);grid-column:span 2;height:40px;"></div>
+              <div class="thumb-ui-block" style="background:rgba(0,201,160,0.05);"></div>
+              <div class="thumb-ui-block" style="background:rgba(0,201,160,0.05);"></div>
+            </div>
+          </div>
+          <div class="highlight-thumb-overlay"><span class="thumb-label">Automation Flows</span></div>
+        </div>
+
+        <div class="highlight-thumb" style="background:#06141e;">
+          <div class="thumb-ui" style="background:linear-gradient(135deg,#081a28,#04101a);">
+            <div style="font-size:18px;font-weight:800;color:rgba(0,201,160,0.75);letter-spacing:-0.03em;line-height:1.1;padding:4px 0 10px;">98.7%<br/><span style="font-size:10px;font-weight:400;color:rgba(255,255,255,0.2);">Model Accuracy</span></div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
+              <div style="height:4px;border-radius:2px;background:rgba(0,201,160,0.12);"><div style="width:98%;height:100%;border-radius:2px;background:rgba(0,201,160,0.65);"></div></div>
+              <div style="height:4px;border-radius:2px;background:rgba(0,201,160,0.08);"><div style="width:84%;height:100%;border-radius:2px;background:rgba(0,201,160,0.38);"></div></div>
+              <div style="height:4px;border-radius:2px;background:rgba(0,201,160,0.06);"><div style="width:72%;height:100%;border-radius:2px;background:rgba(0,201,160,0.28);"></div></div>
+            </div>
+          </div>
+          <div class="highlight-thumb-overlay"><span class="thumb-label">Model Performance</span></div>
+        </div>
+
+        <div class="highlight-thumb" style="background:#081528;">
+          <div class="thumb-ui" style="background:linear-gradient(135deg,#0d1e36,#08152a);">
+            <div class="thumb-ui-bar" style="width:70%;"></div>
+            <div style="display:flex;flex-direction:column;gap:6px;margin-top:8px;flex:1;">
+              <div style="height:28px;border-radius:6px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.05);"></div>
+              <div style="height:28px;border-radius:6px;background:rgba(74,159,213,0.1);border:1px solid rgba(74,159,213,0.14);"></div>
+              <div style="height:28px;border-radius:6px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04);"></div>
+            </div>
+          </div>
+          <div class="highlight-thumb-overlay"><span class="thumb-label">Workflow Builder</span></div>
+        </div>
+
+        <div class="highlight-thumb" style="background:#061828;">
+          <div class="thumb-ui" style="background:linear-gradient(135deg,#0a2040,#061828);">
+            <div class="thumb-ui-bar" style="width:55%;background:rgba(74,159,213,0.22);"></div>
+            <div class="thumb-ui-grid" style="flex:1;margin-top:8px;">
+              <div class="thumb-ui-block" style="background:rgba(74,159,213,0.07);"></div>
+              <div class="thumb-ui-block" style="background:rgba(74,159,213,0.05);"></div>
+              <div class="thumb-ui-block" style="background:rgba(74,159,213,0.05);grid-column:span 2;height:30px;"></div>
+            </div>
+          </div>
+          <div class="highlight-thumb-overlay"><span class="thumb-label">Insights Reports</span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BUILT WITH -->
+    <div class="built-section">
+      <div class="built-label">This website was built with&hellip;</div>
+      <div class="built-filters">
+        <button class="built-chip active"><span class="chip-icon">&#128187;</span> Technology</button>
+        <button class="built-chip"><span class="chip-icon">&#127981;</span> Business & Enterprise</button>
+        <button class="built-chip"><span class="chip-icon">&#128640;</span> Startups</button>
+        <button class="built-chip"><span class="chip-icon">&#127916;</span> Animation</button>
+        <button class="built-chip"><span class="chip-icon">&#128202;</span> Data Visualisation</button>
+      </div>
+      <div class="built-tech-row">
+        <span class="tech-tag">&#9654; GSAP</span>
+        <span class="tech-tag">&#9734; Three.js</span>
+        <span class="tech-tag">&#128065; D3.js</span>
+        <span class="tech-tag">&#9881; React</span>
+        <span class="tech-tag">&#128274; Next.js</span>
+        <span class="tech-tag">&#9729; Vercel</span>
+        <span class="tech-tag">&#128394; Figma</span>
+        <span class="tech-tag">&#9881; Tailwind</span>
+        <span class="tech-tag">&#128200; Microinteractions</span>
+      </div>
+    </div>
+
+    <!-- CREATORS -->
+    <div class="creators-section">
+      <h2 class="section-heading" style="font-size:18px;margin-bottom:20px;">Team &amp; Jury</h2>
+      <table class="creators-table">
+        <thead>
+          <tr>
+            <th>Creator</th>
+            <th>Country</th>
+            <th>Creativity</th>
+            <th>Usability</th>
+            <th>Content</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="creator-cell">
+                <div class="creator-avatar">JR</div>
+                <div>
+                  <div class="creator-name">Jayaraj Verma</div>
+                  <div class="creator-handle">jayaraj.verma@gmail.com</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="creator-flag">&#127468;&#127463;</span> United Kingdom</td>
+            <td class="score-cell"><span class="top">9</span></td>
+            <td class="score-cell"><span class="top">9</span></td>
+            <td class="score-cell"><span class="top">9</span></td>
+            <td class="score-cell"><span class="top">9.0</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="creator-cell">
+                <div class="creator-avatar">AS</div>
+                <div>
+                  <div class="creator-name">Arjun Shah</div>
+                  <div class="creator-handle">arjun@aisolutionlimited.com</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="creator-flag">&#127470;&#127475;</span> India</td>
+            <td class="score-cell"><span>8</span></td>
+            <td class="score-cell"><span>8</span></td>
+            <td class="score-cell"><span>7</span></td>
+            <td class="score-cell"><span>7.67</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="creator-cell">
+                <div class="creator-avatar">SM</div>
+                <div>
+                  <div class="creator-name">Sofia Martinez</div>
+                  <div class="creator-handle">sofia@aisolutionlimited.com</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="creator-flag">&#127466;&#127480;</span> Spain</td>
+            <td class="score-cell"><span>7</span></td>
+            <td class="score-cell"><span>8</span></td>
+            <td class="score-cell"><span>8</span></td>
+            <td class="score-cell"><span>7.00</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="creator-cell">
+                <div class="creator-avatar">LK</div>
+                <div>
+                  <div class="creator-name">Lena Kowalski</div>
+                  <div class="creator-handle">lena@aisolutionlimited.com</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="creator-flag">&#127465;&#127466;</span> Germany</td>
+            <td class="score-cell"><span>7</span></td>
+            <td class="score-cell"><span>7</span></td>
+            <td class="score-cell"><span>7</span></td>
+            <td class="score-cell"><span>7.00</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div><!-- /page-inner -->
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-logo">
+            <img src="brand_assets/brandlogo.png" alt="Flow — AI Solution Limited" />
+          </div>
+          <p class="footer-tagline">Enterprise AI that transforms how intelligent organisations operate, decide, and grow.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">Explore</div>
+          <ul class="footer-links">
+            <li><a href="#">Site of the Day</a></li>
+            <li><a href="#">Inspiration</a></li>
+            <li><a href="#">Case Studies</a></li>
+            <li><a href="#">Experiments</a></li>
+            <li><a href="#">Awards</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Company</div>
+          <ul class="footer-links">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Services</div>
+          <ul class="footer-links">
+            <li><a href="#">AI Consulting</a></li>
+            <li><a href="#">ML Development</a></li>
+            <li><a href="#">Automation</a></li>
+            <li><a href="#">Data Analytics</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Legal</div>
+          <ul class="footer-links">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">Cookies</a></li>
+            <li><a href="#">GDPR</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 AI Solution Limited. All rights reserved.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Twitter</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
