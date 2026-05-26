@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AURORA — Chase the Light. Discover the World.</title>
+  <meta name="description" content="Aurora travel — bespoke journeys to the world's most luminous destinations.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="loader-brand">AURORA</div>
+    <div class="loader-bar-wrap">
+      <div id="loader-bar"></div>
+    </div>
+    <div id="loader-percent">0%</div>
+  </div>
+
+  <!-- FIXED HEADER -->
+  <header class="site-header">
+    <nav class="site-nav">
+      <a href="#" class="nav-logo">AURORA</a>
+      <ul class="nav-links">
+        <li><a href="#">Destinations</a></li>
+        <li><a href="#">Experiences</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#" class="nav-cta">Begin Journey</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO STANDALONE -->
+  <section class="hero-standalone" id="hero">
+    <div class="hero-inner">
+      <span class="hero-eyebrow">EST. 2009 &nbsp;·&nbsp; BESPOKE TRAVEL</span>
+      <h1 class="hero-heading">
+        <span class="word">Chase</span>
+        <span class="word">the</span>
+        <span class="word">Light.</span>
+      </h1>
+      <p class="hero-tagline">Discover the World.</p>
+      <p class="hero-sub">Bespoke journeys to the world's most luminous destinations — built around the moments when light transforms landscape into memory.</p>
+    </div>
+    <div class="hero-brand" aria-hidden="true">AURORA</div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- CANVAS (fixed background, circle-wipes in) -->
+  <div class="canvas-wrap" id="canvas-wrap">
+    <canvas id="canvas"></canvas>
+  </div>
+
+  <!-- DARK OVERLAY (for stats section) -->
+  <div id="dark-overlay"></div>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap" id="marquee" data-scroll-speed="-25">
+    <div class="marquee-text">
+      DISCOVER&nbsp;&nbsp;·&nbsp;&nbsp;EXPLORE&nbsp;&nbsp;·&nbsp;&nbsp;WANDER&nbsp;&nbsp;·&nbsp;&nbsp;ESCAPE&nbsp;&nbsp;·&nbsp;&nbsp;AURORA&nbsp;&nbsp;·&nbsp;&nbsp;DISCOVER&nbsp;&nbsp;·&nbsp;&nbsp;EXPLORE&nbsp;&nbsp;·&nbsp;&nbsp;WANDER&nbsp;&nbsp;·&nbsp;&nbsp;ESCAPE&nbsp;&nbsp;·&nbsp;&nbsp;AURORA&nbsp;&nbsp;·&nbsp;&nbsp;
+    </div>
+  </div>
+
+  <!-- SCROLL CONTAINER — drives total scroll height -->
+  <div id="scroll-container">
+
+    <!-- 001 DISCOVERY: slide-left, align-left, 16%–30% -->
+    <section class="scroll-section section-content align-left"
+             data-enter="16" data-leave="30" data-animation="slide-left">
+      <div class="section-inner">
+        <span class="section-label">001 / Discovery</span>
+        <h2 class="section-heading">Where Every Dawn<br>Reveals a New World</h2>
+        <p class="section-body">We curate journeys to destinations that still carry the feeling of being discovered. From the ember-lit valleys of Cappadocia to the mirror-still lagoons of Palawan — each itinerary is built around the moments when light transforms landscape into memory.</p>
+        <a href="#" class="section-link">Explore Destinations</a>
+      </div>
+    </section>
+
+    <!-- 002 EXPERIENCE: slide-right, align-right, 32%–46% -->
+    <section class="scroll-section section-content align-right"
+             data-enter="32" data-leave="46" data-animation="slide-right">
+      <div class="section-inner">
+        <span class="section-label">002 / Experience</span>
+        <h2 class="section-heading">Journeys Tailored<br>for the Bold</h2>
+        <p class="section-body">Every Aurora journey is authored, not assembled. Our travel architects spend months forging access to places that don't appear in guidebooks — private ruins at dawn, chef's tables above the clouds, sailings where the horizon is yours alone.</p>
+        <a href="#" class="section-link">Our Philosophy</a>
+      </div>
+    </section>
+
+    <!-- STATS: stagger-up, center, 50%–65% (dark overlay) -->
+    <section class="scroll-section section-stats"
+             data-enter="50" data-leave="65" data-animation="stagger-up">
+      <div class="stats-grid">
+        <div class="stat">
+          <div class="stat-row">
+            <span class="stat-number" data-value="127" data-decimals="0">0</span>
+            <span class="stat-suffix">+</span>
+          </div>
+          <span class="stat-label">Destinations</span>
+        </div>
+        <div class="stat">
+          <div class="stat-row">
+            <span class="stat-number" data-value="40" data-decimals="0">0</span>
+            <span class="stat-suffix">K+</span>
+          </div>
+          <span class="stat-label">Travelers</span>
+        </div>
+        <div class="stat">
+          <div class="stat-row">
+            <span class="stat-number" data-value="98" data-decimals="0">0</span>
+            <span class="stat-suffix">%</span>
+          </div>
+          <span class="stat-label">Satisfaction</span>
+        </div>
+        <div class="stat">
+          <div class="stat-row">
+            <span class="stat-number" data-value="15" data-decimals="0">0</span>
+            <span class="stat-suffix">yrs</span>
+          </div>
+          <span class="stat-label">Crafting Light</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 003 VISION: scale-up, align-left, 68%–80% -->
+    <section class="scroll-section section-content align-left"
+             data-enter="68" data-leave="80" data-animation="scale-up">
+      <div class="section-inner">
+        <span class="section-label">003 / Vision</span>
+        <h2 class="section-heading">The World at<br>Golden Hour</h2>
+        <p class="section-body">There is a particular quality of light that exists only in the first and last minutes of day — a warmth that turns the ordinary into the unforgettable. Aurora exists to place you inside that light, in the world's most extraordinary places.</p>
+        <a href="#" class="section-link">Our Story</a>
+      </div>
+    </section>
+
+    <!-- CTA: fade-up, align-right, 82%–100%, persist -->
+    <section class="scroll-section section-cta-block align-right"
+             data-enter="82" data-leave="100" data-animation="fade-up"
+             data-persist="true">
+      <div class="section-inner">
+        <span class="section-label">Begin Your Journey</span>
+        <h2 class="section-heading">Your Adventure<br>Begins Now</h2>
+        <p class="section-body">Join 40,000 travelers who discovered the world at golden hour. Receive curated destination guides and first access to new itineraries.</p>
+        <div class="cta-form">
+          <input type="email" placeholder="your@email.com" class="cta-input" aria-label="Email address">
+          <button class="cta-button" type="button">Begin Journey</button>
+        </div>
+        <p class="cta-note">No spam. Unsubscribe anytime. Your journey, your rules.</p>
+      </div>
+    </section>
+
+  </div><!-- /#scroll-container -->
+
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
